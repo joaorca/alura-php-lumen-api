@@ -23,8 +23,8 @@ class CriarTabelaEpisodios extends Migration
                 $table->integer('serie_id');
 
                 $table->foreign('serie_id')
-                    ->references('series')
-                    ->on('id');
+                    ->references('id')
+                    ->on('series');
             }
         );
     }
