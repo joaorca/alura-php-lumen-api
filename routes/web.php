@@ -11,6 +11,19 @@
 |
 */
 
-$router->get('/', function () use ($router) {
-    return $router->app->version();
-});
+use Laravel\Lumen\Routing\Router;
+
+/** @var Router $router */
+$router->get(
+    '/',
+    function () use ($router) {
+        return $router->app->version();
+    }
+);
+
+$router->group(
+    ['prefix' => '/api'],
+    function () use ($router){
+        $router->get('/series', 'SeriesController@index');
+    }
+);
