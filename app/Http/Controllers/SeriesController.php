@@ -11,4 +11,13 @@ class SeriesController extends Controller
     {
         return Serie::all();
     }
+
+    public function store(Request $request)
+    {
+        return response()
+            ->json(
+                Serie::create(['nome' => $request->nome]),
+                201
+            );
+    }
 }
