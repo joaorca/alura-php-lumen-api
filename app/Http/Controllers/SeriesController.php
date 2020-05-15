@@ -12,7 +12,16 @@ class SeriesController extends Controller
         return Serie::all();
     }
 
-    public function get(int $id)
+    public function store(Request $request)
+    {
+        return response()
+            ->json(
+                Serie::create(['nome' => $request->nome]),
+                201
+            );
+    }
+
+    public function show(int $id)
     {
         $serie = Serie::find($id);
         if (is_null($serie)) {
@@ -21,12 +30,20 @@ class SeriesController extends Controller
         return response()->json($serie);
     }
 
-    public function store(Request $request)
+    public function update(int $id, Request $request)
     {
-        return response()
-            ->json(
-                Serie::create(['nome' => $request->nome]),
-                201
+        $serie = Serie::find($id);
+        if (is_null($serie)) {
+            return response()->json(
+                [
+                    'erro' => 'Recurso não encontrado'
+                ],
+                404
             );
+        }
+        $serie->fill($request->all());
+        $serie->save();
+
+        return $serie;
     }
 }
