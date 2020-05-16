@@ -21,6 +21,8 @@ $router->get(
     }
 );
 
+$router->post('/api/token', 'TokenController@gerarToken');
+
 $router->group(
     ['prefix' => 'api', 'middleware' => 'auth'],
     function () use ($router) {
